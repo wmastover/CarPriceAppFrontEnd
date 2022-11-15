@@ -5,7 +5,6 @@ import {  useSelector } from 'react-redux';
 import { RootState} from "../redux/reduxStore"
 export const AppOverlay = () => {
 
-    const wordle = useSelector((state:RootState) => state.wordle.value) 
 
     const rows = useSelector((state:RootState) => state.rows.value)
     

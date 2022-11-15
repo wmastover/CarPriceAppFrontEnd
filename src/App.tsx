@@ -8,11 +8,9 @@ import { ISourceOptions } from "tsparticles-engine";
 import {AppOverlay} from "./components/appOverlay"
 import { store } from "./redux/reduxStore"
 import { Provider} from "react-redux"
-import firebase from '@firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 //
 
 // Import the functions you need from the SDKs you need
@@ -43,7 +41,9 @@ function App() {
     const fetchMakes = async() => {
         const makes = await getDocs(collection(db, "Makes/Ford/Models"))
         //console.log(makes)
-        return(makes)
+
+        
+        return(makes.docs[0].id)
     
     }
     
