@@ -23,44 +23,19 @@ import { initializeApp } from "firebase/app";
 
 function App() {
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyCJnV5tX7MUnsV7LWz-lPOFAZiP7a1V0uI",
-        authDomain: "car-price-data.firebaseapp.com",
-        projectId: "car-price-data",
-        storageBucket: "car-price-data.appspot.com",
-        messagingSenderId: "663275972524",
-        appId: "1:663275972524:web:4c8578976ce5817934bc09",
-        measurementId: "G-L463SMR1D9"
-      };
 
-
-    const app = initializeApp(firebaseConfig);
-
-    const db = getFirestore(app)
-
-    const fetchMakes = async() => {
-        const makes = await getDocs(collection(db, "Makes/Ford/Models"))
-        //console.log(makes)
-
-        
-        return(makes.docs[0].id)
-    
-    }
     
 
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadFull(engine);
     }, []);
 
-    useEffect(() => {
-        console.log(fetchMakes())
-    })
-
+    
     return (
         <Provider store={store}>
             <div className="App" style = {{margin: "5%"}} >
                 <Particles options={particlesOptions as ISourceOptions} init={particlesInit}/>
-                <AppOverlay/>   
+                <AppOverlay />   
             </div>
         </Provider>
     );

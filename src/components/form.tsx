@@ -1,28 +1,53 @@
-import React, { DetailedHTMLProps } from 'react';
-import { useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import Select from "react-select"
+import { fetchMakes } from "../data/fetchMakes"
+import { fetchModels } from '../data/fetchModels';
+import { fetchYears } from '../data/fetchYears';
+import { fetchCars } from '../data/carQuery';
+import { arrayToDropdown } from '../data/arrayToDropdown';
+
+import { initializeFirestoreDb } from '../data/initialiseFirestore';
+
 
 export const Form = () => {
 
- 
+    //initialise firestore
+
+    const db = initializeFirestoreDb()
+
+    //set placeholder value for makes
+    const [makes, setMakes] = useState([{
+        value: "none", label: "none"
+    }])
+
+    const [models, setModels] = useState([{
+        value: "none", label: "none"
+    }])
+
+    const [years, setYears] = useState([{
+        value: "none", label: "none"
+    }])
+
+
+    //query database to get list of makes, and add list to the first dropdown
+    useEffect(() => {
+        
+        fetchMakes(db).then((value) => {
+            console.log("makes")
+            console.log(value)
+            const makesArray = arrayToDropdown(value)
+            
+            setMakes(makesArray)})
+    }, [])
+
+    
+
 
     const [make, setMake] = useState("")
     const [model, setModel] = useState("")
     const [year, setYear] = useState("")
 
-    const makes = [
-        { value: 'Ford', label: 'Ford' },
-      ]
-
-    const models = [
-    { value: 'Fiesta', label: 'Fiesta' },
-    { value: 'Focus', label: 'Focus' },
-    ]
-
-    const years = [
-    { value: '2015', label: '2015' },
-    { value: '2010', label: '2010' },    
-    ]
 
 
     return(
@@ -40,8 +65,16 @@ export const Form = () => {
                     options={makes}
                     placeholder="Make"
                     onChange={(e) => {
+                        // if you change the make, refresh the models dropdown
                         if (e !== null) { console.log(e.value)
                         setMake(e.value)
+                        fetchModels(db, e.value).then(
+                            (value) => {
+            
+                                const modelsArray = arrayToDropdown(value)
+                                
+                                setModels(modelsArray)}
+                            )
                         }
                     }}
                     />
@@ -52,10 +85,19 @@ export const Form = () => {
                     options={models}
                     placeholder="Model"
                     onChange={(e) => {
+                        // if you change the model, refresh the years dropdown
                         if (e !== null) { console.log(e.value)
-                        setModel(e.value)}
-                    }}
-                    />
+                        setModel(e.value)
+                        fetchYears(db, make, e.value).then(
+                            (value) => {
+            
+                                const yearsArray = arrayToDropdown(value)
+                                
+                                setYears(yearsArray)}
+                            )
+                        }
+                    
+                    }}/>
                 </div>
                 <div   
                 style={{margin: "2%", flex: 2}}>
@@ -71,7 +113,15 @@ export const Form = () => {
                 <button
                 style={{margin: "2%", flex: 2}}
                 type="button"
-                onClick={() => {console.log("Go buttomn pressed")}}
+                onClick={() => {
+                    // on button press, get cars, then update redux store 
+                    console.log(make)
+                    console.log(model)
+                    console.log(year)
+                    fetchCars(db, make, model, year).then((value) => {
+                        console.log(value)
+                    })
+                    }}
                 
                 > Go </button>
             </div>
