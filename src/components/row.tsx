@@ -1,17 +1,17 @@
 import React from 'react';
-import { row, rowItem } from '../type/data';
+import { row,  } from '../type/data';
 
 export const Row = ({row}: {row?:row}) => {
 
-    const rowItem = {
-        letter: " ",
-        color: "white"
+    // const rowItem = {
+    //     letter: " ",
+    //     color: "white"
 
-    } as rowItem
+    // } as rowItem
 
-    if (row === undefined) {
-        row = [rowItem,rowItem,rowItem,rowItem,rowItem,] as row
-    }
+    // if (row === undefined) {
+    //     row = [rowItem,rowItem,rowItem,rowItem,rowItem,] as row
+    // }
 
 
     return (

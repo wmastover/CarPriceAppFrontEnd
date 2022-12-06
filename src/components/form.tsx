@@ -4,7 +4,7 @@ import Select from "react-select"
 import { fetchMakes } from "../data/fetchMakes"
 import { fetchModels } from '../data/fetchModels';
 import { fetchYears } from '../data/fetchYears';
-import { fetchCars } from '../data/carQuery';
+import { fetchCars } from '../data/fetchCars';
 import { arrayToDropdown } from '../data/arrayToDropdown';
 
 import { initializeFirestoreDb } from '../data/initialiseFirestore';
