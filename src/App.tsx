@@ -8,10 +8,7 @@ import { ISourceOptions } from "tsparticles-engine";
 import {AppOverlay} from "./components/appOverlay"
 import { store } from "./redux/reduxStore"
 import { Provider} from "react-redux"
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
-import { initializeApp } from "firebase/app";
-//
 
 // Import the functions you need from the SDKs you need
 
@@ -34,8 +31,9 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App" style = {{margin: "5%"}} >
-                <Particles options={particlesOptions as ISourceOptions} init={particlesInit}/>
+            <Particles options={particlesOptions as ISourceOptions} init={particlesInit}/>
                 <AppOverlay />   
+               
             </div>
         </Provider>
     );

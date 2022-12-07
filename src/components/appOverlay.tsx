@@ -3,14 +3,23 @@ import { Row } from './row';
 import { Form } from './form';
 import {  useSelector } from 'react-redux';
 import { RootState} from "../redux/reduxStore"
-import { Firestore } from 'firebase/firestore';
 
 export const AppOverlay = () => {
 
 
     const rows = useSelector((state:RootState) => state.rows.value)
+    const params = useSelector((state:RootState) => state.params.value)
+
+    const numberOfDataPoints = Number( params.numberOfDataPoints)
+    let confidenceLevel = ""
     
-    
+    if(numberOfDataPoints > 300) {
+         confidenceLevel = "High"
+    } else if ( numberOfDataPoints > 100) {
+         confidenceLevel = "Medium"
+    } else if ( numberOfDataPoints > 0){ 
+         confidenceLevel = "low"}
+
     return (
         <div style={{display: "flex", flexDirection: "row", }}>
             {/* left column */}
@@ -28,12 +37,19 @@ export const AppOverlay = () => {
                 >
                     <h3
                     style={{flex: 1, display: "flex", marginInline:"5%"}}
-                    >No of DataPoints: </h3>
+                    >No of DataPoints: {params.numberOfDataPoints}</h3>
                     <h3
                     style={{flex: 1, display: "flex", marginInline:"5%"}}
-                    >Confidence Level: </h3>
+                    >Confidence Level: {confidenceLevel}</h3>
                 </div>
-                <Row/>
+                <div>
+                    {
+                        rows.map((row) => <Row
+                        row={row}
+                        params={params}
+                        />)
+                    }
+                </div>
             </div>
 
             {/* right column */}

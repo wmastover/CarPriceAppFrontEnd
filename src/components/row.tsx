@@ -1,26 +1,40 @@
 import React from 'react';
-import { row,  } from '../type/data';
 
-export const Row = ({row}: {row?:row}) => {
+import { params, row  } from '../type/data';
 
-    // const rowItem = {
-    //     letter: " ",
-    //     color: "white"
+export const Row = ({row,params}: {row:any, params:params}) => {
 
-    // } as rowItem
+    const expectedPrice = Number(params.parameterA)* (Math.pow(Math.E, (Number(params.parameterB) * Number(row.Milage)* -1)))
 
-    // if (row === undefined) {
-    //     row = [rowItem,rowItem,rowItem,rowItem,rowItem,] as row
-    // }
+    const price = Number(row?.Price.replace("£","").replace(",",""))
+
+    const percentageDiscount = ((expectedPrice - price) / price) * 100
+    // 
+    // this corrects for the space in the photo link field name on firestore
+    // once this is fixed, the row type above should be row not any
+    // 
+    const PhotoLink = row["Photo Link"]
+
+    console.log(PhotoLink)
+
+    const openInNewTab = (url: any) => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
 
 
     return (
-        <div style={{display: "flex", flexDirection: "row", flex: 1}}>
+        <div style={{display: "flex", flexDirection: "row", flex: 1, fontSize: 25}}
+        >
             <div style={{backgroundColor: "whitesmoke", flex: 1, margin: "2%", 
             padding: "2%", borderRadius: 10,}}>
                 <img style={{maxHeight: "200px", maxWidth: "200px"}}
-                src="https://media.istockphoto.com/id/1084688262/vector/car-icon-vector-flat-simple-cartoon-transportation-symbol-isolated-on-white-side-view.jpg?s=612x612&w=0&k=20&c=aM8iiKm2WCjsRqGYGxkQPq7vktwkfZBxoduYxvkOCXw="
+                src={PhotoLink}
                 alt="cat"
+                onClick={() => {
+                    openInNewTab(row.Link)
+                }
+                    
+                }
                 />
             </div>
             <div style={{backgroundColor: "whitesmoke", flex: 2, margin: "2%", 
@@ -31,19 +45,19 @@ export const Row = ({row}: {row?:row}) => {
             style={{display: "flex", flexDirection: "row", flex: 1}}>
                 <text
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                Price</text>
+                Price: {row?.Price}</text>
                 <text
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                Milage</text>
+                Milage: {row?.Milage}</text>
             </div>
             <div
             style={{display: "flex", flexDirection: "row", flex: 1}}>
                 <text
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                Expected Price</text>
+                Expected Price: £{Math.trunc(expectedPrice)}</text>
                 <text
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                % Discount</text>
+                Percentage Discount: {Math.trunc(percentageDiscount)}%</text>
             </div>            
             </div>
         </div>
