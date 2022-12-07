@@ -26,8 +26,8 @@ export const Row = ({row,params}: {row:any, params:params}) => {
         <div style={{display: "flex", flexDirection: "row", flex: 1, fontSize: 25}}
         >
             <div style={{backgroundColor: "whitesmoke", flex: 1, margin: "2%", 
-            padding: "2%", borderRadius: 10,}}>
-                <img style={{maxHeight: "200px", maxWidth: "200px"}}
+            padding: "1%", borderRadius: 10,}}>
+                <img style={{maxHeight: "300px", maxWidth: "300px"}}
                 src={PhotoLink}
                 alt="cat"
                 onClick={() => {
@@ -43,21 +43,21 @@ export const Row = ({row,params}: {row:any, params:params}) => {
             
             <div
             style={{display: "flex", flexDirection: "row", flex: 1}}>
-                <text
+                <h5
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                Price: {row?.Price}</text>
-                <text
+                Price: {row?.Price}</h5>
+                <h5
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                Milage: {row?.Milage}</text>
+                Milage: {row?.Milage}</h5>
             </div>
             <div
             style={{display: "flex", flexDirection: "row", flex: 1}}>
-                <text
+                <h5
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                Expected Price: £{Math.trunc(expectedPrice)}</text>
-                <text
+                Expected Price: £{Math.trunc(expectedPrice)}</h5>
+                <h5
                 style={{display: "flex", flexDirection: "row", flex: 1}}>
-                Percentage Discount: {Math.trunc(percentageDiscount)}%</text>
+                Percentage Discount: {Math.trunc(percentageDiscount)}%</h5>
             </div>            
             </div>
         </div>

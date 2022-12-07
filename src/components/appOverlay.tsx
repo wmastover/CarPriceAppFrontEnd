@@ -12,13 +12,21 @@ export const AppOverlay = () => {
 
     const numberOfDataPoints = Number( params.numberOfDataPoints)
     let confidenceLevel = ""
-    
+    let confidenceLevelStyle = { flex: 1, display: "flex", marginInline:"5%", color:"Black"}
+
     if(numberOfDataPoints > 300) {
          confidenceLevel = "High"
-    } else if ( numberOfDataPoints > 100) {
+         confidenceLevelStyle.color = "green"
+    } else if ( numberOfDataPoints > 100 && numberOfDataPoints < 300) {
          confidenceLevel = "Medium"
-    } else if ( numberOfDataPoints > 0){ 
-         confidenceLevel = "low"}
+         confidenceLevelStyle.color = "yellow"
+    } else if ( numberOfDataPoints > 0 && numberOfDataPoints < 100){ 
+         confidenceLevel = "low"
+         confidenceLevelStyle.color = "red"}
+    
+    console.log(confidenceLevel)
+    console.log(confidenceLevelStyle)
+
 
     return (
         <div style={{display: "flex", flexDirection: "row", }}>
@@ -39,7 +47,7 @@ export const AppOverlay = () => {
                     style={{flex: 1, display: "flex", marginInline:"5%"}}
                     >No of DataPoints: {params.numberOfDataPoints}</h3>
                     <h3
-                    style={{flex: 1, display: "flex", marginInline:"5%"}}
+                    style={confidenceLevelStyle}
                     >Confidence Level: {confidenceLevel}</h3>
                 </div>
                 <div>

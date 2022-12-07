@@ -16,7 +16,7 @@ export const Form = () => {
 
     const db = initializeFirestoreDb()
 
-    //set placeholder value for makes
+    //set placeholder values for drop down lists
     const [makes, setMakes] = useState([{
         value: "none", label: "none"
     }])
@@ -39,11 +39,11 @@ export const Form = () => {
             const makesArray = arrayToDropdown(value)
             
             setMakes(makesArray)})
-    }, [])
+    }, [db])
 
     
 
-
+    //create empty variables for drop down selections
     const [make, setMake] = useState("")
     const [model, setModel] = useState("")
     const [year, setYear] = useState("")
@@ -52,6 +52,7 @@ export const Form = () => {
 
     return(
         <form 
+        //dont refresh page when the button is pressed
             onSubmit={e => {
                 e.preventDefault()
             } 
@@ -66,15 +67,19 @@ export const Form = () => {
                     placeholder="Make"
                     onChange={(e) => {
                         // if you change the make, refresh the models dropdown
-                        if (e !== null) { console.log(e.value)
-                        setMake(e.value)
-                        fetchModels(db, e.value).then(
-                            (value) => {
-            
-                                const modelsArray = arrayToDropdown(value)
-                                
-                                setModels(modelsArray)}
-                            )
+                        if (e !== null) { 
+                            //set make variable = to selection
+                            setMake(e.value)
+                            //query firestore to find models for selected make
+                            fetchModels(db, e.value).then(
+                                (value) => {
+                                    //format the data to display in dropdown
+                                    const modelsArray = arrayToDropdown(value)
+                                    //save to dropdown list
+                                    setModels(modelsArray)}
+                                )
+                            setModel("")
+                            setYear("")
                         }
                     }}
                     />
@@ -95,6 +100,7 @@ export const Form = () => {
                                 
                                 setYears(yearsArray)}
                             )
+                            setYear("")
                         }
                     
                     }}/>
@@ -115,13 +121,18 @@ export const Form = () => {
                 type="button"
                 onClick={() => {
                     // on button press, get cars, then update redux store 
-                    console.log(make)
-                    console.log(model)
-                    console.log(year)
-                    fetchCars(db, make, model, year).then((value) => {
-                        console.log(value)
-                    })
-                    }}
+                        if (make !== "" && model !== "" && year !== "") {
+                            console.log(make)
+                            console.log(model)
+                            console.log(year)
+                            fetchCars(db, make, model, year).then((value) => {
+                                console.log(value)
+                            })
+                        } else { 
+                            alert("invalid make, model or year")
+                            window.location.reload()}
+                    }
+                }
                 
                 > Go </button>
             </div>
