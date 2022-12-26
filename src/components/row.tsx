@@ -23,9 +23,19 @@ export const Row = ({row,params}: {row:any, params:params}) => {
     // once this is fixed, the row type above should be row not any
     // 
     const PhotoLink = row["Photo Link"]
+    const percentageDiscount = ((expectedPrice - price) / price) * 100
+    // 
+    // this corrects for the space in the photo link field name on firestore
+    // once this is fixed, the row type above should be row not any
+    // 
+    const PhotoLink = row["Photo Link"]
 
     console.log(PhotoLink)
+    console.log(PhotoLink)
 
+    const openInNewTab = (url: any) => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
     const openInNewTab = (url: any) => {
         window.open(url, '_blank', 'noopener,noreferrer');
       };
