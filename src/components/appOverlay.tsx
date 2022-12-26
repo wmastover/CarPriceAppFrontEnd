@@ -10,25 +10,6 @@ export const AppOverlay = () => {
 
 
     const rows = useSelector((state:RootState) => state.rows.value)
-    const params = useSelector((state:RootState) => state.params.value)
-
-    const numberOfDataPoints = Number( params.numberOfDataPoints)
-    let confidenceLevel = ""
-    let confidenceLevelStyle = { flex: 1, display: "flex", marginInline:"5%", color:"Black"}
-
-    if(numberOfDataPoints > 300) {
-         confidenceLevel = "High"
-         confidenceLevelStyle.color = "green"
-    } else if ( numberOfDataPoints > 100 && numberOfDataPoints < 300) {
-         confidenceLevel = "Medium"
-         confidenceLevelStyle.color = "yellow"
-    } else if ( numberOfDataPoints > 0 && numberOfDataPoints < 100){ 
-         confidenceLevel = "low"
-         confidenceLevelStyle.color = "red"}
-    
-    console.log(confidenceLevel)
-    console.log(confidenceLevelStyle)
-
 
     const params = useSelector((state:RootState) => state.params.value)
 
@@ -63,7 +44,7 @@ export const AppOverlay = () => {
                 </div> 
 
                 <Form />
-                <Form />
+                
                 <div
                 style={{marginInline: "5%", flexDirection: "row", display: "flex",}}
                 >

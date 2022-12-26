@@ -17,7 +17,6 @@ export const Row = ({row,params}: {row:any, params:params}) => {
 
     const price = Number(row?.Price.replace("£","").replace(",",""))
 
-    const percentageDiscount = ((expectedPrice - price) / price) * 100
     // 
     // this corrects for the space in the photo link field name on firestore
     // once this is fixed, the row type above should be row not any
@@ -28,7 +27,6 @@ export const Row = ({row,params}: {row:any, params:params}) => {
     // this corrects for the space in the photo link field name on firestore
     // once this is fixed, the row type above should be row not any
     // 
-    const PhotoLink = row["Photo Link"]
 
     console.log(PhotoLink)
     console.log(PhotoLink)
@@ -36,10 +34,6 @@ export const Row = ({row,params}: {row:any, params:params}) => {
     const openInNewTab = (url: any) => {
         window.open(url, '_blank', 'noopener,noreferrer');
       };
-    const openInNewTab = (url: any) => {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      };
-
 
     return (
         <div style={{display: "flex", flexDirection: "row", flex: 1, fontSize: 25, height: "120px"}}
