@@ -5,13 +5,10 @@ import { useState } from 'react';
 import Popup from 'reactjs-popup';
 
 
-
 export const Row = ({row,params}: {row:any, params:params}) => {
 
     const [open, setOpen] = useState(false);
     const closeModal = () => setOpen(false);
-
-    
 
     const expectedPrice = Number(params.parameterA)* (Math.pow(Math.E, (Number(params.parameterB) * Number(row.Milage)* -1)))
 

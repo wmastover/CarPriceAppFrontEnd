@@ -4,13 +4,14 @@ import { Form } from './form';
 import {  useSelector } from 'react-redux';
 import { RootState} from "../redux/reduxStore"
 import Select from "react-select"
-import { FaCarSide } from "react-icons/fa"
+import { useEffect, useState } from 'react';
+import { InitialPopup } from './intialPopup';
+
 
 export const AppOverlay = () => {
 
 
     const rows = useSelector((state:RootState) => state.rows.value)
-
     const params = useSelector((state:RootState) => state.params.value)
 
     const numberOfDataPoints = Number( params.numberOfDataPoints)
@@ -30,19 +31,20 @@ export const AppOverlay = () => {
     console.log(confidenceLevel)
     console.log(confidenceLevelStyle)
 
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        setOpen(true)
+      }, []);
 
     return (
         <div style={{display: "flex", flexDirection: "row",height: "92%",  marginTop: "2%", marginBottom: "2%"}}>
             {/* left column */}
+            <InitialPopup open={open} setOpen={setOpen}/>
             <div style={{flex: 1, }}></div>
 
             <div style={{backgroundColor: "grey",  padding: "2%", opacity: "80%",
                         borderRadius: 10, flex: 6, flexDirection: "row"  }}>
-                <div style={{flexDirection: "row", flex: 1, display:"flex"}}>
-                     
-                    <div style={{flex: 1 }}><FaCarSide style={{flex: 1}}/>      Car Finder</div>          
-                </div> 
-
                 <Form />
                 
                 <div
@@ -56,7 +58,7 @@ export const AppOverlay = () => {
                     >Confidence Level: {confidenceLevel}</h4>
                     <Select 
                     
-                    placeholder="sort"
+                    placeholder="sort cars"
                     options={[{
                         value: "Lowest Milage", label: "Lowest Milage"
                     },
