@@ -21,7 +21,7 @@ export const InitialPopup = (props: any) => {
                 <div style={{ display: "flex", flexDirection: "row"}}>
                     <div style={{flex: 1}}></div>
                         <div style={{flex: 8}}>
-                            <h1>Autotrader search is crap</h1>    
+                            <h1>Autotrader is DUMB</h1>    
                             <img style={{maxHeight: "400px", maxWidth: "400px", borderRadius: 5}}
                             src={image}
                             alt="car"/>
