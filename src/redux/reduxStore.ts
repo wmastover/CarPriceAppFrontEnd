@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { rowsSliceReducer } from './rowsSlice'
-import { wordleSliceReducer } from './wordleSlice'
+import { paramsSliceReducer } from "./paramsSlice"
 
 export const store = configureStore({
   reducer: {
     rows: rowsSliceReducer,
-    wordle: wordleSliceReducer,
+    params: paramsSliceReducer,
   }
 })
 

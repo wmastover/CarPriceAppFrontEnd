@@ -12,19 +12,14 @@ export const rowsSlice = createSlice({
     },
 
     reducers: {
-        addRow: (state, action) => {
-            //can write non immutable logic in createSlice, exception to rule
-            console.log("add row", action.payload)
-            state.value = [...state.value, action.payload]
+
+        changeRows: (state, action) => {
+            state.value = action.payload
         },
 
-        clear: state => {
-            // test this
-            state.value = initialState
-        },
     }
 })
 
-export const { addRow, clear} = rowsSlice.actions
+export const { changeRows} = rowsSlice.actions
 
 export const rowsSliceReducer = rowsSlice.reducer
