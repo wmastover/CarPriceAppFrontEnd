@@ -10,16 +10,14 @@ export const Row = ({row,params}: {row:any, params:params}) => {
     const [open, setOpen] = useState(false);
     const closeModal = () => setOpen(false);
 
-    const expectedPrice = Number(params.parameterA)* (Math.pow(Math.E, (Number(params.parameterB) * Number(row.Milage)* -1)))
-
-    const price = Number(row?.Price.replace("£","").replace(",",""))
+    const mileage = row?.mileage
 
     // 
     // this corrects for the space in the photo link field name on firestore
     // once this is fixed, the row type above should be row not any
     // 
-    const PhotoLink = row["Photo Link"]
-    const percentageDiscount = ((expectedPrice - price) / price) * 100
+    const PhotoLink = row?.imageLink
+    
     // 
     // this corrects for the space in the photo link field name on firestore
     // once this is fixed, the row type above should be row not any
@@ -65,41 +63,41 @@ export const Row = ({row,params}: {row:any, params:params}) => {
                     <div  style={{flex: 1, display: "flex", flexDirection: "row"}}>
                         <div style={{flex: 1, padding: "3%", marginLeft: "5%", marginRight: "2%",
                         marginBottom: "2%", backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Price
+                            Listing Price: £{row?.price}
                         </div>
                         <div style={{flex: 1, padding: "3%",  marginRight: "5%",  marginLeft: "2%",
                         marginBottom: "2%",backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Expected Price
+                            Expected Price: £{row?.expectedPrice}
                         </div>
                     </div>
                     <div  style={{flex: 1, display: "flex", flexDirection: "row"}}>
                         <div style={{flex: 1, padding: "3%", marginLeft: "5%", marginRight: "2%",
                         marginBottom: "2%", backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Discount
+                            Discount  £{String(Number(row?.expectedPrice) - Number(row?.price)) }
                         </div>
                         <div style={{flex: 1, padding: "3%",  marginRight: "5%",  marginLeft: "2%",
                         marginBottom: "2%", backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Percentage Discount
+                            Percentage Discount: {row?.discount}%
                         </div>
                     </div>
                     <div  style={{flex: 1, display: "flex", flexDirection: "row"}}>
                         <div style={{flex: 1, padding: "3%", marginLeft: "5%", marginRight: "2%",
                         marginBottom: "2%", backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Milage
+                            Mileage: {row?.mileage}
                         </div>
                         <div style={{flex: 1, padding: "3%",  marginRight: "5%",  marginLeft: "2%",
                         marginBottom: "2%", backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Engine Size
+                            Engine Size: {row?.engineSize}
                         </div>
                     </div>
                     <div  style={{flex: 1, display: "flex", flexDirection: "row"}}>
                         <div style={{flex: 1, padding: "3%", marginLeft: "5%", marginRight: "2%",
                         marginBottom: "2%", backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Manual vs Auto
+                            Transmission: {row?.transmission}
                         </div>
                         <div style={{flex: 1, padding: "3%",  marginRight: "5%",  marginLeft: "2%",
                         marginBottom: "2%", backgroundColor: "whitesmoke", borderRadius: 10}}>
-                            Fuel Type
+                            Fuel Type: {row?.fuelType}
                         </div>
                     </div>
                 </div>
@@ -117,16 +115,16 @@ export const Row = ({row,params}: {row:any, params:params}) => {
                     Price: </div>
                     <div
                     style={{display: "flex", flex: 1, paddingInline: "5%", fontSize: 20}}>
-                    {row?.Price}</div>
+                    £{row?.price}</div>
                 </div>
                 <div
                 style={{display: "flex", flexDirection: "column", flex: 1}}>
                     <div
                     style={{display: "flex", flex: 1, paddingInline: "5%", fontSize: 20}}>
-                    Milage:</div>
+                    Mileage: </div>
                     <div
                     style={{display: "flex", flex: 1, paddingInline: "5%", fontSize: 20}}>
-                    {row?.Milage}</div>
+                    {row?.mileage}</div>
                 </div>
                 <div
                 style={{display: "flex", flexDirection: "column", flex: 1}}>
@@ -135,7 +133,7 @@ export const Row = ({row,params}: {row:any, params:params}) => {
                     Expected Price:</div>
                     <div
                     style={{display: "flex", flex: 1, paddingInline: "5%", fontSize: 20}}>
-                    £{Math.trunc(expectedPrice)}</div>
+                    £{row?.expectedPrice}</div>
                 </div>
                 <div
                 style={{display: "flex", flexDirection: "column", flex: 1,
@@ -146,14 +144,14 @@ export const Row = ({row,params}: {row:any, params:params}) => {
                     </div>
                     <div
                     style={{display: "flex", flex: 1, paddingInline: "5%", fontSize: 20}}>
-                    {Math.trunc(percentageDiscount)}%</div>
+                    {row?.discount}%</div>
                 </div>
                 <div
                 style={{display: "flex", flexDirection: "column", flex: 1,
                 }}>
                     <div  style={{padding: "2%", flex: "1"}}></div>
                     <button style={{padding: "2%",margin: "2%", backgroundColor: "Grey",
-                     flex: "1", borderRadius: 10}}
+                     flex: "1", borderRadius: 10, borderColor: "grey", boxShadow: "none"}}
                      onClick={() => {setOpen(o => !o)}}>
                         More Detail
                     </button>

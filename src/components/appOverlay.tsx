@@ -38,7 +38,8 @@ export const AppOverlay = () => {
       }, []);
 
     return (
-        <div style={{display: "flex", flexDirection: "row",height: "92%",  marginTop: "2%", marginBottom: "2%"}}>
+        <div style={{display: "flex", flexDirection: "row",height: "92%",  marginTop: "2%", 
+        marginBottom: "2%"}}>
             {/* left column */}
             <InitialPopup open={open} setOpen={setOpen}/>
             <div style={{flex: 1, }}></div>

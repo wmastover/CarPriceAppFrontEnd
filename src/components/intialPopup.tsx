@@ -21,13 +21,17 @@ export const InitialPopup = (props: any) => {
                 <div style={{ display: "flex", flexDirection: "row"}}>
                     <div style={{flex: 1}}></div>
                         <div style={{flex: 8}}>
-                            <h1>Autotrader is DUMB</h1>    
-                            <img style={{maxHeight: "400px", maxWidth: "400px", borderRadius: 5}}
+                            <h1 style={{textAlign: "center"}}>Autotrader search = 💩</h1>    
+                            <img style={{maxHeight: "400px", maxWidth: "350px",
+                            borderRadius: 5, marginLeft: "5%", marginRight: "5%" }}
                             src={image}
                             alt="car"/>
-                            <h3>Why would I say that? Car price is directly related to
-                                Milage. What does this mean? it means that we can find 
-                                amazing deals you won't find on Autotrader.
+                            <h3>
+                                Car price is directly related to Milage.
+                            </h3>
+                            <h3> 
+                                Why should you care? We use this to find deals on cars
+                                that you wont find anywhere else
                             </h3>
                 
                         </div>
