@@ -52,7 +52,7 @@ export const Row = ({row,params}: {row:any, params:params}) => {
                             src={PhotoLink}
                             alt="car"
                             onClick={() => {
-                                openInNewTab(row.Link)
+                                openInNewTab(row?.link)
                             }
                                 
                             }
